@@ -46,6 +46,9 @@ global.fetch = function (url) {
   assert.equal(movie.length, 1);
   assert.equal(movie[0].url, 'https://a.111477.xyz/d/movie123');
   assert.match(movie[0].title, /1080p/);
+  assert.match(movie[0].headers['User-Agent'], /Mozilla/);
+  assert.equal(movie[0].headers['Referer'], 'https://a.111477.xyz/');
+  assert.equal(movie[0].headers['Accept-Encoding'], 'identity');
 
   const episode = await getStreams('202', 'tv', 1, 2);
   assert.equal(episode.length, 1);

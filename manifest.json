@@ -1,12 +1,12 @@
 {
   "name": "111477 Index",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scrapers": [
     {
       "id": "index111477",
       "name": "111477 Index",
       "description": "Searches the 111477 directory index for matching movie and TV episode files.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "author": "Local",
       "supportedTypes": ["movie", "tv"],
       "filename": "providers/index111477.js",

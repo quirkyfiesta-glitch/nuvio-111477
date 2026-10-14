@@ -6,6 +6,17 @@
 
 var INDEX_BASE = 'https://a.111477.xyz/';
 var INDEX_GAP_MS = 3400;
+var BROWSER_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+var INDEX_HEADERS = {
+  'User-Agent': BROWSER_USER_AGENT,
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+};
+var PLAYBACK_HEADERS = {
+  'User-Agent': BROWSER_USER_AGENT,
+  'Accept': 'video/webm,video/ogg,video/*;q=0.9,application/octet-stream;q=0.8,*/*;q=0.5',
+  'Accept-Encoding': 'identity',
+  'Referer': INDEX_BASE
+};
 var _indexQueue = Promise.resolve();
 var _lastIndexRequestAt = 0;
 var VIDEO_EXTENSIONS = ['mkv', 'mp4', 'avi', 'm4v', 'mov', 'wmv', 'flv', 'webm', 'ts', 'mpg', 'mpeg'];
@@ -63,7 +74,7 @@ function cleanTmdbTitle(raw) {
 function resolveMetadata(tmdbId, mediaType) {
   var type = mediaType === 'tv' ? 'tv' : 'movie';
   var url = 'https://www.themoviedb.org/' + type + '/' + encodeURIComponent(String(tmdbId));
-  return fetch(url, { headers: { 'Accept': 'text/html,application/xhtml+xml' } })
+  return fetch(url, { headers: INDEX_HEADERS })
     .then(function (response) {
       if (!response.ok) throw new Error('TMDB page returned HTTP ' + response.status);
       return response.text();
@@ -175,7 +186,7 @@ function fetchIndex(url) {
       var attempt = 0;
       function request() {
         _lastIndexRequestAt = Date.now();
-        return fetch(url, { headers: { 'Accept': 'text/html,application/xhtml+xml' } }).then(function (response) {
+        return fetch(url, { headers: INDEX_HEADERS }).then(function (response) {
           if ((response.status === 429 || response.status === 503) && attempt < 2) {
             attempt++;
             var retryAfter = parseInt(response.headers.get('retry-after') || '', 10);
@@ -324,7 +335,7 @@ function streamsFromEntries(entries, mediaType, season, episode, seasonContext) 
       url: item.entry.url,
       quality: item.quality.resolution,
       size: size,
-      headers: { 'Referer': 'https://a.111477.xyz/' }
+      headers: Object.assign({}, PLAYBACK_HEADERS)
     };
   });
 }

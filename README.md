@@ -1,6 +1,6 @@
 # 111477 Index provider for Nuvio
 
-This is a first-pass Nuvio provider package. Nuvio installs it from the **Plugins** section, not the Addons section.
+This is a Nuvio provider package (version 0.1.1). Nuvio installs it from the **Plugins** section, not the Addons section.
 
 ## Files
 
@@ -12,7 +12,7 @@ This is a first-pass Nuvio provider package. Nuvio installs it from the **Plugin
 1. Reads the title and year from the public TMDB title page using the provided TMDB ID.
 2. Searches the `movies/` or `tvs/` directory on `a.111477.xyz`.
 3. Matches a movie filename or the requested season/episode.
-4. Returns the stable index URL for each matching file. It intentionally does not cache `workers.dev` URLs, which can be temporary redirects.
+4. Returns the stable index URL for each matching file. It intentionally does not cache `workers.dev` URLs, which can be temporary redirects. Playback requests now include a browser User-Agent, a video-oriented Accept header, `Accept-Encoding: identity`, and the index Referer.
 
 ## Install / test
 
