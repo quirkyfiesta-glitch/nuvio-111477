@@ -5,3 +5,6 @@ Live integration tests are pending because the source host was unreachable from 
 3. A title with punctuation (colon, ampersand, apostrophe).
 4. Confirm the stream's URL is the index file URL and playback follows its redirect.
 5. Confirm HTTP 429/503 responses cause retries rather than a false match.
+
+
+Version 0.1.2 also checks extensionless link MIME hints and filename metadata.

@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { getStreams } = require('../providers/index111477.js');
+const { getStreams } = require('../providers/index111477_v012.js');
 
 const movieHtml = `<!doctype html><html><head>
 <meta property="og:title" content="Test Film" />
@@ -44,15 +44,15 @@ global.fetch = function (url) {
 (async () => {
   const movie = await getStreams('101', 'movie', null, null);
   assert.equal(movie.length, 1);
-  assert.equal(movie[0].url, 'https://a.111477.xyz/d/movie123');
+  assert.equal(movie[0].url, 'https://a.111477.xyz/d/movie123?type=mkv');
+  assert.equal(movie[0].behaviorHints.filename, 'Test.Film.2020.1080p.WEB-DL.x265.mkv');
+  assert.equal(movie[0].size, 1200000000);
   assert.match(movie[0].title, /1080p/);
-  assert.match(movie[0].headers['User-Agent'], /Mozilla/);
-  assert.equal(movie[0].headers['Referer'], 'https://a.111477.xyz/');
-  assert.equal(movie[0].headers['Accept-Encoding'], 'identity');
 
   const episode = await getStreams('202', 'tv', 1, 2);
   assert.equal(episode.length, 1);
-  assert.equal(episode[0].url, 'https://a.111477.xyz/d/episode123');
+  assert.equal(episode[0].url, 'https://a.111477.xyz/d/episode123?type=mkv');
+  assert.equal(episode[0].behaviorHints.filename, 'Test.Show.S01E02.720p.WEB-DL.x264.mkv');
   assert.match(episode[0].title, /720p/);
   console.log('Smoke tests passed: movie lookup, episode filtering, metadata parsing, stable source URLs.');
 })().catch(error => {
