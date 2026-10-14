@@ -1,0 +1,20 @@
+{
+  "name": "111477 Index",
+  "version": "0.1.0",
+  "scrapers": [
+    {
+      "id": "index111477",
+      "name": "111477 Index",
+      "description": "Searches the 111477 directory index for matching movie and TV episode files.",
+      "version": "0.1.0",
+      "author": "Local",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/index111477.js",
+      "enabled": true,
+      "contentLanguage": ["en"],
+      "formats": ["mkv", "mp4", "avi", "webm", "m4v", "mov", "ts"],
+      "limited": false,
+      "supportsExternalPlayer": true
+    }
+  ]
+}
